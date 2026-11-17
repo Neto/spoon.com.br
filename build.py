@@ -242,11 +242,15 @@ for rel, (app, icon, zip_name, size) in DOWNLOADS.items():
           + css + fill(page) + FOOTER)
 
 # Public trial download pages (linked from the site and from the license server).
+# The button goes through the license Worker, which counts trial downloads per app per day
+# (totals only) and sends the visitor on to the zip.
+TRIAL_COUNTER = "https://spoon-license.spoonsoftware.workers.dev/trial/"
 trial = (src / "trial.html").read_text()
 for app, icon in (("Spin", "{{SPIN}}"), ("Grabb", "{{Grabb}}")):
     zip_name, size = next((z, s) for a, _, z, s in DOWNLOADS.values() if a == app)
     page = (trial.replace("{{APP}}", app).replace("{{ICON}}", icon)
-            .replace("{{ZIP_URL}}", RELEASE + zip_name).replace("{{ZIP_NAME}}", zip_name).replace("{{SIZE}}", size))
+            .replace("{{TRIAL_URL}}", f"{TRIAL_COUNTER}{app.lower()}?f={zip_name}")
+            .replace("{{ZIP_NAME}}", zip_name).replace("{{SIZE}}", size))
     write(f"download/{app.lower()}/index.html", HEAD.format(description=f"Download {app} for Mac. Free 7 day trial.", og_title=f"Download {app}")
           + css + fill(page) + FOOTER)
 
