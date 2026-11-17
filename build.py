@@ -180,6 +180,8 @@ PURCHASES = {
     "get/sw8jntSb82WU/index.html": ("Spin and Grabb", 8),
 }
 CONSENT = (src / "consent.html").read_text()
+# Prices in reais for Brazil and the phone version of the trial pages, added to every page.
+SITE = (src / "site.html").read_text()
 
 
 def write(rel, html):
@@ -187,7 +189,7 @@ def write(rel, html):
     if rel in PURCHASES:
         name, value = PURCHASES[rel]
         purchase = '{content_name:"%s",value:%d,currency:"USD"}' % (name, value)
-    html = html.rstrip() + "\n" + CONSENT.replace("{{PURCHASE}}", purchase)
+    html = html.rstrip() + "\n" + SITE + CONSENT.replace("{{PURCHASE}}", purchase)
     out = root / rel
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(html)

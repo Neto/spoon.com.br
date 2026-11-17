@@ -86,6 +86,8 @@ p{margin:0}
 .terms{width:100%;display:flex;flex-wrap:wrap;gap:4px 14px;font-size:13px;color:var(--ink-2)}
 .terms span::before{content:"\2713\00a0";color:var(--ok);font-weight:600}
 .req{font-size:13px;color:var(--ink-2)}
+.req-inline{width:100%;font-size:14px;color:var(--ink-2)}
+.req-inline b{color:var(--ink);font-weight:600}
 .note{font-size:13px;color:var(--ink-2)}
 
 /* demo player */
@@ -184,13 +186,13 @@ footer nav a{color:var(--ink-2)}
     <div class="wrap">
       <p class="eyebrow">Apps for Mac</p>
       <h1>Small apps<br><span>for simple tasks.</span></h1>
-      <p class="lead">Two little Mac apps that each do one job well. Pay $5 once and every future update is yours.</p>
+      <p class="lead">Two little Mac apps that each do one job well. Pay <span data-brl="R$ 30">$5</span> once and every future update is yours.</p>
       <div class="hero-apps">
         <a href="#spin"><img src="{{SPIN}}" alt="" width="148" height="148">Spin<small>Clean up your Desktop in style.</small></a>
         <a href="#grabb"><img class="img-grabb" src="{{Grabb}}" alt="" width="148" height="148">Grabb<small>Get videos from anywhere.</small></a>
       </div>
       <div class="promise">
-        <span><b>$5</b> per app, once</span><a class="deal" href="/bundle/"><b>$8</b> for both</a><span>Lifetime upgrades</span><span>No in-app purchases</span><span>No subscriptions</span>
+        <span><b data-brl="R$ 30">$5</b> per app, once</span><a class="deal" href="/bundle/"><b data-brl="R$ 45">$8</b> for both</a><span>Lifetime upgrades</span><span>No in-app purchases</span><span>No subscriptions</span>
       </div>
     </div>
   </section>
@@ -210,12 +212,11 @@ footer nav a{color:var(--ink-2)}
             <li>Drag files and folders in from the Finder and choose Open at Login</li>
           </ul>
           <div class="buy">
-            <div class="price">$5.00<small>USD</small></div>
-            <a class="pill" href="https://buy.stripe.com/5kQ00idowf4G5k11rR3AY00" aria-label="Buy Spin for 5 dollars">Buy Spin</a>
-            <a class="pill ghost" href="/download/spin/">Free 7 day trial</a>
-            <div class="terms"><span>Lifetime upgrades</span><span>No in-app purchases</span><span>No subscriptions</span></div>
+            <a class="pill" href="/download/spin/">Try free for 7 days</a>
+            <a class="pill ghost" href="https://buy.stripe.com/5kQ00idowf4G5k11rR3AY00" aria-label="Buy Spin for 5 dollars">Buy for <span data-brl="R$ 30">$5</span></a>
+            <p class="req-inline"><b>macOS 26 + Apple silicon.</b> Older Mac? <a href="#grabb">Grabb</a> runs on macOS 15.</p>
+            <div class="terms"><span>Pay once</span><span>Lifetime upgrades</span><span>No in-app purchases</span><span>No subscriptions</span></div>
           </div>
-          <p class="req">Requires macOS 26 or later on a Mac with Apple silicon.</p>
         </div>
         <div class="player" data-video aria-label="Screen recording of Spin opening a spiral of folders">
           <video src="/media/spin-demo.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
@@ -239,12 +240,11 @@ footer nav a{color:var(--ink-2)}
             <li>Everything it needs is inside the app. Nothing else to install</li>
           </ul>
           <div class="buy">
-            <div class="price">$5.00<small>USD</small></div>
-            <a class="pill" href="https://buy.stripe.com/eVqcN4bgo7CecMt1rR3AY01" aria-label="Buy Grabb for 5 dollars">Buy Grabb</a>
-            <a class="pill ghost" href="/download/grabb/">Free 7 day trial</a>
-            <div class="terms"><span>Lifetime upgrades</span><span>No in-app purchases</span><span>No subscriptions</span></div>
+            <a class="pill" href="/download/grabb/">Try free for 7 days</a>
+            <a class="pill ghost" href="https://buy.stripe.com/eVqcN4bgo7CecMt1rR3AY01" aria-label="Buy Grabb for 5 dollars">Buy for <span data-brl="R$ 30">$5</span></a>
+            <p class="req-inline"><b>macOS 15 + Apple silicon.</b></p>
+            <div class="terms"><span>Pay once</span><span>Lifetime upgrades</span><span>No in-app purchases</span><span>No subscriptions</span></div>
           </div>
-          <p class="req">Requires macOS 15 or later on a Mac with Apple silicon.</p>
           <p class="note">Download only content you have permission to save.</p>
         </div>
         <div class="player" data-video aria-label="Screen recording of Grabb downloading a video">
@@ -258,7 +258,7 @@ footer nav a{color:var(--ink-2)}
     <div class="wrap">
       <div class="band">
         <div class="icons"><img src="{{SPIN}}" alt="" width="72" height="72"><img class="img-grabb" src="{{Grabb}}" alt="" width="72" height="72"></div>
-        <div class="txt"><h2>Get both for $8.</h2><p>Spin and Grabb together, once. Lifetime upgrades for both apps.</p></div>
+        <div class="txt"><h2>Get both for <span data-brl="R$ 45">$8</span>.</h2><p>Spin and Grabb together, once. Lifetime upgrades for both apps.</p></div>
         <a class="pill" href="/bundle/">See the Bundle</a>
       </div>
     </div>
@@ -269,11 +269,11 @@ footer nav a{color:var(--ink-2)}
       <h2>Questions</h2>
       <details>
         <summary>What does “lifetime upgrades” mean?</summary>
-        <p>You pay $5 once. Every new version of the app you bought is free, for as long as we make the app.</p>
+        <p>You pay <span data-brl="R$ 30">$5</span> once. Every new version of the app you bought is free, for as long as we make the app.</p>
       </details>
       <details>
         <summary>Are there in-app purchases or a subscription?</summary>
-        <p>No. The $5 unlocks the whole app. There is nothing more to buy and nothing renews.</p>
+        <p>No. The <span data-brl="R$ 30">$5</span> unlocks the whole app. There is nothing more to buy and nothing renews.</p>
       </details>
       <details>
         <summary>Does it work on my Mac?</summary>
@@ -289,7 +289,7 @@ footer nav a{color:var(--ink-2)}
 
 <footer>
   <div class="wrap">
-    <p>Prices in US dollars. Taxes may apply depending on where you live. Grabb uses yt-dlp, FFmpeg and Deno under their own licenses.</p>
+    <p><span data-brl="Prices in Brazilian reais for visitors in Brazil.">Prices in US dollars.</span> Taxes may apply depending on where you live. Grabb uses yt-dlp, FFmpeg and Deno under their own licenses.</p>
     {{FOOTER_ROW}}
   </div>
 </footer>

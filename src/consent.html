@@ -30,6 +30,10 @@
     if(c){put(KEY,c);box.hidden=true;if(c==="yes")start();else if(loaded)location.reload();return}
     if(t.id==="cookie-settings"){e.preventDefault();drop(KEY);box.hidden=false;return}
     if(loaded&&t.href&&t.href.indexOf("buy.stripe.com")>-1)fbq("track","InitiateCheckout",{content_name:t.getAttribute("aria-label")||t.textContent});
+    // A trial download starts: lets the ads optimize for downloads, not only for link clicks.
+    if(loaded&&t.hasAttribute("data-trial")){fbq("track","StartTrial",{content_name:t.getAttribute("data-trial"),value:0,currency:"USD"});rdt("track","SignUp")}
+    // A phone visitor sends the page to their Mac.
+    if(loaded&&t.hasAttribute("data-send-link"))fbq("track","Lead",{content_name:document.title});
   });
   var s=get(KEY);if(s==="yes")start();else if(s!=="no")box.hidden=false;
 })();

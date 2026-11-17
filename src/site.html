@@ -1,0 +1,39 @@
+<style>
+[data-mac-only][hidden],[data-phone-only][hidden]{display:none!important}
+.dl-phone{margin:32px 0 8px;padding:18px 20px;border-radius:18px;background:var(--tile);box-shadow:inset 0 0 0 1px var(--line)}
+.dl-phone .dl-btn{margin:14px 0 0}
+.dl-phone button.pill{font-size:17px;padding:11px 24px}
+</style>
+<script>
+(function(){
+  /* Brazil sees prices in reais (the Stripe checkout charges R$ 30, and R$ 45 for the Bundle).
+     Read from the time zone only: nothing leaves the browser. */
+  var BR=["America/Sao_Paulo","America/Bahia","America/Fortaleza","America/Recife","America/Belem","America/Maceio",
+    "America/Araguaina","America/Santarem","America/Manaus","America/Cuiaba","America/Campo_Grande","America/Porto_Velho",
+    "America/Boa_Vista","America/Rio_Branco","America/Eirunepe","America/Noronha"];
+  var tz="";try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(e){}
+  if(BR.indexOf(tz)>-1){
+    document.querySelectorAll("[data-brl]").forEach(function(el){el.textContent=el.getAttribute("data-brl")});
+    document.querySelectorAll("a[aria-label]").forEach(function(a){
+      a.setAttribute("aria-label",a.getAttribute("aria-label").replace("for 5 dollars","for 30 reais").replace("for 8 dollars","for 45 reais"))});
+  }
+
+  /* Phones and tablets cannot install a Mac app: offer to send the page to the Mac instead.
+     An iPad reports itself as a Mac, but it has a touch screen. */
+  var ua=navigator.userAgent||"";
+  var phone=/iPhone|iPod|Android|Mobile/i.test(ua)||(/Macintosh/.test(ua)&&navigator.maxTouchPoints>1)||(/iPad/.test(ua));
+  if(phone){
+    document.querySelectorAll("[data-mac-only]").forEach(function(el){el.hidden=true});
+    document.querySelectorAll("[data-phone-only]").forEach(function(el){el.hidden=false});
+  }
+  document.addEventListener("click",function(e){
+    var b=e.target.closest&&e.target.closest("[data-send-link]");if(!b)return;
+    var status=document.querySelector("[data-send-status]");
+    var url=location.origin+location.pathname,title=document.title;
+    function copied(ok){if(status)status.textContent=ok?"Link copied. Paste it in a message to yourself.":url}
+    if(navigator.share){navigator.share({title:title,text:"Open this on your Mac:",url:url}).catch(function(){})}
+    else if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){copied(true)},function(){copied(false)})}
+    else copied(false);
+  });
+})();
+</script>
