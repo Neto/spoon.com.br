@@ -22,7 +22,7 @@ def data_uri(name):
     return "data:image/png;base64," + base64.b64encode((src / name).read_bytes()).decode()
 
 
-ICONS = {"{{SPIN}}": data_uri("spin.png"), "{{Grabb}}": data_uri("grabb.png")}
+ICONS = {"{{SPIN}}": data_uri("spin.png"), "{{Grabb}}": data_uri("grabb.png"), "{{GIST}}": data_uri("gist.png")}
 
 
 def spoon_logo():
@@ -75,7 +75,7 @@ HEAD = """<!doctype html>
 
 FOOTER_ROW = (
     '<div class="row"><span>© 2026 Spoon Software. All rights reserved.</span>'
-    '<nav aria-label="Site"><a href="/">Spin and Grabb</a><a href="/bundle/">Bundle</a><a href="/company/">Spoon Software</a>'
+    '<nav aria-label="Site"><a href="/">Spin, Grabb and Gist</a><a href="/bundle/">Bundle</a><a href="/company/">Spoon Software</a>'
     '<a href="/privacy/">Privacy Policy</a><a href="#" id="cookie-settings">Cookies</a></nav></div>'
 )
 
@@ -202,8 +202,9 @@ template = (src / "template.html").read_text()
 body = template.replace('<meta charset="utf-8">\n', "", 1)
 write("index.html", HEAD.format(
     description="Spin cleans up your Desktop in style. Grabb gets videos from anywhere. "
-                "Small Mac apps for simple tasks, 5 dollars each with lifetime upgrades.",
-    og_title="Spin and Grabb") + fill(body) + "\n")
+                "Gist keeps only the article of a web page and shortens it, for free. "
+                "Small Mac apps for simple tasks.",
+    og_title="Spin, Grabb and Gist") + fill(body) + "\n")
 
 # Shared base: colour tokens, type, links, layout and hero, plus the footer rules.
 style = template[template.index("<style>") + len("<style>"):template.index("</style>")]
@@ -213,13 +214,13 @@ css = "<style>\n" + base + footer_css + PAGE_CSS + "</style>\n"
 
 pages = {
     "company/index.html": ("company.html",
-                           "Spoon Software makes small Mac apps for simple tasks: Spin and Grabb.",
+                           "Spoon Software makes small Mac apps for simple tasks: Spin, Grabb and Gist.",
                            "Spoon Software"),
     "bundle/index.html": ("bundle.html",
                           "Spin and Grabb together for 8 dollars, once. Both Mac apps with lifetime upgrades.",
                           "Spin and Grabb Bundle"),
     "privacy/index.html": ("privacy.html",
-                           "How Spoon Software handles your data in Spin, Grabb and on this website.",
+                           "How Spoon Software handles your data in Spin, Grabb, Gist and on this website.",
                            "Privacy Policy · Spoon Software"),
 }
 for rel, (name, description, og_title) in pages.items():
@@ -253,6 +254,14 @@ for app, icon in (("Spin", "{{SPIN}}"), ("Grabb", "{{Grabb}}")):
             .replace("{{ZIP_NAME}}", zip_name).replace("{{SIZE}}", size))
     write(f"download/{app.lower()}/index.html", HEAD.format(description=f"Download {app} for Mac. Free 7 day trial.", og_title=f"Download {app}")
           + css + fill(page) + FOOTER)
+
+# Gist is free: its download page also goes through the trial counter, as "gist".
+FREE_ZIP, FREE_SIZE = "Gist-1.0.0.zip", "1.3 MB"
+page = ((src / "free.html").read_text().replace("{{APP}}", "Gist").replace("{{ICON}}", "{{GIST}}")
+        .replace("{{TRIAL_URL}}", f"{TRIAL_COUNTER}gist?f={FREE_ZIP}")
+        .replace("{{ZIP_NAME}}", FREE_ZIP).replace("{{SIZE}}", FREE_SIZE))
+write("download/gist/index.html", HEAD.format(description="Download Gist for Mac, free.", og_title="Download Gist")
+      + css + fill(page) + FOOTER)
 
 # Bundle download page: one payment, both installers.
 BUNDLE_PAGE = "get/sw8jntSb82WU/index.html"

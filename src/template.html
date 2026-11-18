@@ -1,21 +1,21 @@
 <meta charset="utf-8">
 <meta name="facebook-domain-verification" content="1gtfl1ik5s4ryik4ktzvzjawohm730">
-<title>Spin and Grabb</title>
+<title>Spin, Grabb and Gist</title>
 <style>
 /* Layout: Apple-style Mac app store page. Glass nav, centered hero, one section per app (copy + looping demo player + buy box), FAQ, footer */
 :root{
   --bg:#f5f5f7; --tile:#ffffff; --ink:#1d1d1f; --ink-2:#6e6e73; --line:#d2d2d7;
   --link:#0066cc; --btn:#0071e3; --btn-ink:#ffffff;
-  --spin:#ff3d9a; --grabb:#5b3df5; --ok:#1f9d55; 
+  --spin:#ff3d9a; --grabb:#5b3df5; --gist:#0a9a8a; --ok:#1f9d55; 
   --font:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
   --bg:#000000; --tile:#161617; --ink:#f5f5f7; --ink-2:#a1a1a6; --line:#424245;
-  --link:#2997ff; --spin:#ff5aac; --grabb:#8c78ff; --ok:#30d158;  color-scheme:dark;
+  --link:#2997ff; --spin:#ff5aac; --grabb:#8c78ff; --gist:#35d0bd; --ok:#30d158;  color-scheme:dark;
 }}
 :root[data-theme="dark"]{
   --bg:#000000; --tile:#161617; --ink:#f5f5f7; --ink-2:#a1a1a6; --line:#424245;
-  --link:#2997ff; --spin:#ff5aac; --grabb:#8c78ff; --ok:#30d158;  color-scheme:dark;
+  --link:#2997ff; --spin:#ff5aac; --grabb:#8c78ff; --gist:#35d0bd; --ok:#30d158;  color-scheme:dark;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -74,6 +74,7 @@ p{margin:0}
 .tagline{font-size:clamp(21px,2.4vw,26px);line-height:1.25;font-weight:600;letter-spacing:-.025em}
 #spin .tagline{color:var(--spin)}
 #grabb .tagline{color:var(--grabb)}
+#gist .tagline{color:var(--gist)}
 .copy .what{color:var(--ink-2);max-width:46ch}
 .copy ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:15px}
 .copy li{display:grid;grid-template-columns:18px 1fr;gap:10px}
@@ -186,13 +187,14 @@ footer nav a{color:var(--ink-2)}
     <div class="wrap">
       <p class="eyebrow">Apps for Mac</p>
       <h1>Small apps<br><span>for simple tasks.</span></h1>
-      <p class="lead">Two little Mac apps that each do one job well. Pay <span data-brl="R$ 30">$5</span> once and every future update is yours.</p>
+      <p class="lead">Little Mac apps that each do one job well. Pay <span data-brl="R$ 30">$5</span> once and every future update is yours. Gist is free.</p>
       <div class="hero-apps">
         <a href="#spin"><img src="{{SPIN}}" alt="" width="148" height="148">Spin<small>Clean up your Desktop in style.</small></a>
         <a href="#grabb"><img class="img-grabb" src="{{Grabb}}" alt="" width="148" height="148">Grabb<small>Get videos from anywhere.</small></a>
+        <a href="#gist"><img src="{{GIST}}" alt="" width="148" height="148">Gist<small>Read the point, not the page.</small></a>
       </div>
       <div class="promise">
-        <span><b data-brl="R$ 30">$5</b> per app, once</span><a class="deal" href="/bundle/"><b data-brl="R$ 45">$8</b> for both</a><span>Lifetime upgrades</span><span>No in-app purchases</span><span>No subscriptions</span>
+        <span><b data-brl="R$ 30">$5</b> per app, once</span><a class="deal" href="/bundle/"><b data-brl="R$ 45">$8</b> for both</a><a class="deal" href="#gist">Gist is <b>free</b></a><span>Lifetime upgrades</span><span>No in-app purchases</span><span>No subscriptions</span>
       </div>
     </div>
   </section>
@@ -254,6 +256,34 @@ footer nav a{color:var(--ink-2)}
     </div>
   </section>
 
+  <section class="app" id="gist">
+    <div class="wrap">
+      <div class="app-card">
+        <div class="copy">
+          <img class="ico" src="{{GIST}}" alt="Gist icon" width="84" height="84">
+          <h2>Gist</h2>
+          <p class="tagline">Read the point, not the page.</p>
+          <p class="what">Gist opens a web page and keeps only the article. Paste a link and click Summarize. Then move the slider to shorten the text: keep all of it, or only the most important 10%. Gist uses the article's own sentences, in their order, so it never adds words that the author did not write.</p>
+          <ul>
+            <li>Removes menus, ads, photo captions and “read also” lists</li>
+            <li>Shorten by 0% to 90%, with the word count and reading time</li>
+            <li>Translate to English or Portuguese on your Mac with Apple Intelligence</li>
+            <li>Export as PDF, share, or copy the text</li>
+          </ul>
+          <div class="buy">
+            <div class="price">Free</div>
+            <a class="pill" href="/download/gist/">Download Gist free</a>
+            <p class="req-inline"><b>macOS 26 + Apple silicon.</b> Translation needs Apple Intelligence turned on.</p>
+            <div class="terms"><span>Free</span><span>No account</span><span>No key or sign-in</span><span>Your text stays on your Mac</span></div>
+          </div>
+        </div>
+        <div class="player" data-video aria-label="Screen recording of Gist summarizing and translating a news article">
+          <video src="/media/gist-demo.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="bundle-band" id="bundle">
     <div class="wrap">
       <div class="band">
@@ -277,7 +307,11 @@ footer nav a{color:var(--ink-2)}
       </details>
       <details>
         <summary>Does it work on my Mac?</summary>
-        <p>Both apps need a Mac with Apple silicon (M1 or later). Spin needs macOS 26 or later. Grabb needs macOS 15 or later.</p>
+        <p>All apps need a Mac with Apple silicon (M1 or later). Spin and Gist need macOS 26 or later. Grabb needs macOS 15 or later. Translation in Gist needs Apple Intelligence turned on in System Settings.</p>
+      </details>
+      <details>
+        <summary>Is Gist really free?</summary>
+        <p>Yes. Gist has no price, no trial, no account and no ads. It reads only the page you open, and Apple Intelligence translates on your Mac, so your text does not go to us or to an AI service.</p>
       </details>
       <details>
         <summary>Do I need to sign in to Instagram to use Grabb?</summary>
@@ -289,7 +323,7 @@ footer nav a{color:var(--ink-2)}
 
 <footer>
   <div class="wrap">
-    <p><span data-brl="Prices in Brazilian reais for visitors in Brazil.">Prices in US dollars.</span> Taxes may apply depending on where you live. Grabb uses yt-dlp, FFmpeg and Deno under their own licenses.</p>
+    <p><span data-brl="Prices in Brazilian reais for visitors in Brazil.">Prices in US dollars.</span> Gist is free. Taxes may apply depending on where you live. Grabb uses yt-dlp, FFmpeg and Deno under their own licenses.</p>
     {{FOOTER_ROW}}
   </div>
 </footer>
