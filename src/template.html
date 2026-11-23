@@ -1,21 +1,21 @@
 <meta charset="utf-8">
 <meta name="facebook-domain-verification" content="1gtfl1ik5s4ryik4ktzvzjawohm730">
-<title>Spin, Grabb and Gist</title>
+<title>Spin, Grabb, Gist and ReelScroll</title>
 <style>
 /* Layout: Apple-style Mac app store page. Glass nav, centered hero, one section per app (copy + looping demo player + buy box), FAQ, footer */
 :root{
   --bg:#f5f5f7; --tile:#ffffff; --ink:#1d1d1f; --ink-2:#6e6e73; --line:#d2d2d7;
   --link:#0066cc; --btn:#0071e3; --btn-ink:#ffffff;
-  --spin:#ff3d9a; --grabb:#5b3df5; --gist:#0a9a8a; --ok:#1f9d55; 
+  --spin:#ff3d9a; --grabb:#5b3df5; --gist:#0a9a8a; --reel:#d9480f; --ok:#1f9d55; 
   --font:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
   --bg:#000000; --tile:#161617; --ink:#f5f5f7; --ink-2:#a1a1a6; --line:#424245;
-  --link:#2997ff; --spin:#ff5aac; --grabb:#8c78ff; --gist:#35d0bd; --ok:#30d158;  color-scheme:dark;
+  --link:#2997ff; --spin:#ff5aac; --grabb:#8c78ff; --gist:#35d0bd; --reel:#ff8a4c; --ok:#30d158;  color-scheme:dark;
 }}
 :root[data-theme="dark"]{
   --bg:#000000; --tile:#161617; --ink:#f5f5f7; --ink-2:#a1a1a6; --line:#424245;
-  --link:#2997ff; --spin:#ff5aac; --grabb:#8c78ff; --gist:#35d0bd; --ok:#30d158;  color-scheme:dark;
+  --link:#2997ff; --spin:#ff5aac; --grabb:#8c78ff; --gist:#35d0bd; --reel:#ff8a4c; --ok:#30d158;  color-scheme:dark;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -38,7 +38,7 @@ p{margin:0}
 .hero h1{font-size:clamp(46px,8.4vw,96px);line-height:1.02;letter-spacing:-.05em}
 .hero h1 span{color:var(--ink-2)}
 .hero .lead{font-size:clamp(19px,2.4vw,24px);color:var(--ink-2);max-width:34ch;margin:20px auto 0;line-height:1.35}
-.hero-apps{display:flex;justify-content:center;gap:clamp(28px,6vw,72px);margin-top:48px}
+.hero-apps{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(28px,6vw,72px);margin-top:48px}
 .hero-apps a{display:flex;flex-direction:column;align-items:center;gap:12px;color:var(--ink);font-weight:600;font-size:19px}
 .hero-apps a:hover{text-decoration:none}
 
@@ -75,6 +75,8 @@ p{margin:0}
 #spin .tagline{color:var(--spin)}
 #grabb .tagline{color:var(--grabb)}
 #gist .tagline{color:var(--gist)}
+#reelscroll .tagline{color:var(--reel)}
+.app.solo .app-card{grid-template-columns:minmax(0,1fr)}
 .copy .what{color:var(--ink-2);max-width:46ch}
 .copy ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:15px}
 .copy li{display:grid;grid-template-columns:18px 1fr;gap:10px}
@@ -187,14 +189,15 @@ footer nav a{color:var(--ink-2)}
     <div class="wrap">
       <p class="eyebrow">Apps for Mac</p>
       <h1>Small apps<br><span>for simple tasks.</span></h1>
-      <p class="lead">Little Mac apps that each do one job well. Pay <span>$5</span> once and every future update is yours. Gist is free.</p>
+      <p class="lead">Little Mac apps that each do one job well. Pay <span>$5</span> once and every future update is yours. Gist and ReelScroll are free.</p>
       <div class="hero-apps">
         <a href="#spin"><img src="{{SPIN}}" alt="" width="148" height="148">Spin<small>Clean up your Desktop in style.</small></a>
         <a href="#grabb"><img class="img-grabb" src="{{Grabb}}" alt="" width="148" height="148">Grabb<small>Get videos from anywhere.</small></a>
         <a href="#gist"><img src="{{GIST}}" alt="" width="148" height="148">Gist<small>Read the point, not the page.</small></a>
+        <a href="#reelscroll"><img src="{{REELSCROLL}}" alt="" width="148" height="148">ReelScroll<small>Watch Reels hands free.</small></a>
       </div>
       <div class="promise">
-        <span><b>$5</b> per app, once</span><a class="deal" href="/bundle/"><b>$8</b> for Spin + Grabb</a><a class="deal" href="#gist">Gist is <b>free</b></a><span>Lifetime upgrades</span><span>No in-app purchases</span><span>No subscriptions</span>
+        <span><b>$5</b> per app, once</span><a class="deal" href="/bundle/"><b>$8</b> for Spin + Grabb</a><a class="deal" href="#gist">Gist is <b>free</b></a><a class="deal" href="#reelscroll">ReelScroll is <b>free</b></a><span>Lifetime upgrades</span><span>No in-app purchases</span><span>No subscriptions</span>
       </div>
     </div>
   </section>
@@ -284,6 +287,31 @@ footer nav a{color:var(--ink-2)}
     </div>
   </section>
 
+  <section class="app solo" id="reelscroll">
+    <div class="wrap">
+      <div class="app-card">
+        <div class="copy">
+          <img class="ico" src="{{REELSCROLL}}" alt="ReelScroll icon" width="84" height="84">
+          <h2>ReelScroll</h2>
+          <p class="tagline">Watch Reels hands free.</p>
+          <p class="what">ReelScroll moves Instagram Reels on for you. When a video ends, the next Reel starts. A photo post stays for 10 seconds, then moves on. It lives in the menu bar and the Dock, and you turn it on and off with one click.</p>
+          <ul>
+            <li>Works in Chrome, Brave, Edge and Safari</li>
+            <li>Waits for each video to end, so you never miss the last second</li>
+            <li>Opens Instagram Reels in a new window with one click</li>
+            <li>Launch at login, if you want it ready all the time</li>
+          </ul>
+          <div class="buy">
+            <div class="price">Free</div>
+            <a class="pill" href="/download/reelscroll/">Download ReelScroll free</a>
+            <p class="req-inline"><b>macOS 13 or later.</b> Apple silicon or Intel.</p>
+            <div class="terms"><span>Free</span><span>No account</span><span>No key or sign-in</span><span>Never reads your messages or posts</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="bundle-band" id="bundle">
     <div class="wrap">
       <div class="band">
@@ -307,7 +335,7 @@ footer nav a{color:var(--ink-2)}
       </details>
       <details>
         <summary>Does it work on my Mac?</summary>
-        <p>All apps need a Mac with Apple silicon (M1 or later). Spin and Gist need macOS 26 or later. Grabb needs macOS 15 or later. Translation in Gist needs Apple Intelligence turned on in System Settings.</p>
+        <p>All apps need a Mac with Apple silicon (M1 or later). Spin and Gist need macOS 26 or later. Grabb needs macOS 15 or later. Translation in Gist needs Apple Intelligence turned on in System Settings. ReelScroll needs macOS 13 or later and runs on Apple silicon and Intel Macs.</p>
       </details>
       <details>
         <summary>Is Gist really free?</summary>
@@ -323,7 +351,7 @@ footer nav a{color:var(--ink-2)}
 
 <footer>
   <div class="wrap">
-    <p><span>Prices in US dollars.</span> Gist is free. Taxes may apply depending on where you live. Grabb uses yt-dlp, FFmpeg and Deno under their own licenses.</p>
+    <p><span>Prices in US dollars.</span> Gist and ReelScroll are free. Taxes may apply depending on where you live. Grabb uses yt-dlp, FFmpeg and Deno under their own licenses.</p>
     {{FOOTER_ROW}}
   </div>
 </footer>

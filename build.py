@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build the site from src/.
 
-src/template.html  -> index.html          (Spin and Grabb sales page)
+src/template.html  -> index.html          (sales page: Spin, Grabb, Gist and ReelScroll)
 src/company.html   -> company/index.html  (Spoon Software home)
 src/privacy.html   -> privacy/index.html  (Privacy Policy)
 
@@ -22,7 +22,8 @@ def data_uri(name):
     return "data:image/png;base64," + base64.b64encode((src / name).read_bytes()).decode()
 
 
-ICONS = {"{{SPIN}}": data_uri("spin.png"), "{{Grabb}}": data_uri("grabb.png"), "{{GIST}}": data_uri("gist.png")}
+ICONS = {"{{SPIN}}": data_uri("spin.png"), "{{Grabb}}": data_uri("grabb.png"), "{{GIST}}": data_uri("gist.png"),
+         "{{REELSCROLL}}": data_uri("reelscroll.png")}
 
 
 def spoon_logo():
@@ -75,7 +76,7 @@ HEAD = """<!doctype html>
 
 FOOTER_ROW = (
     '<div class="row"><span>© 2026 Spoon Software. All rights reserved.</span>'
-    '<nav aria-label="Site"><a href="/">Spin, Grabb and Gist</a><a href="/bundle/">Bundle</a><a href="/company/">Spoon Software</a>'
+    '<nav aria-label="Site"><a href="/">Apps</a><a href="/bundle/">Bundle</a><a href="/company/">Spoon Software</a>'
     '<a href="/privacy/">Privacy Policy</a><a href="#" id="cookie-settings">Cookies</a></nav></div>'
 )
 
@@ -203,8 +204,9 @@ body = template.replace('<meta charset="utf-8">\n', "", 1)
 write("index.html", HEAD.format(
     description="Spin cleans up your Desktop in style. Grabb gets videos from anywhere. "
                 "Gist keeps only the article of a web page and shortens it, for free. "
+                "ReelScroll moves Instagram Reels on when a video ends, for free. "
                 "Small Mac apps for simple tasks.",
-    og_title="Spin, Grabb and Gist") + fill(body) + "\n")
+    og_title="Spin, Grabb, Gist and ReelScroll") + fill(body) + "\n")
 
 # Shared base: colour tokens, type, links, layout and hero, plus the footer rules.
 style = template[template.index("<style>") + len("<style>"):template.index("</style>")]
@@ -214,13 +216,13 @@ css = "<style>\n" + base + footer_css + PAGE_CSS + "</style>\n"
 
 pages = {
     "company/index.html": ("company.html",
-                           "Spoon Software makes small Mac apps for simple tasks: Spin, Grabb and Gist.",
+                           "Spoon Software makes small Mac apps for simple tasks: Spin, Grabb, Gist and ReelScroll.",
                            "Spoon Software"),
     "bundle/index.html": ("bundle.html",
                           "Spin and Grabb together for 8 dollars, once. Both Mac apps with lifetime upgrades.",
                           "Spin and Grabb Bundle"),
     "privacy/index.html": ("privacy.html",
-                           "How Spoon Software handles your data in Spin, Grabb, Gist and on this website.",
+                           "How Spoon Software handles your data in Spin, Grabb, Gist, ReelScroll and on this website.",
                            "Privacy Policy · Spoon Software"),
 }
 for rel, (name, description, og_title) in pages.items():
@@ -261,6 +263,14 @@ page = ((src / "free.html").read_text().replace("{{APP}}", "Gist").replace("{{IC
         .replace("{{TRIAL_URL}}", f"{TRIAL_COUNTER}gist?f={FREE_ZIP}")
         .replace("{{ZIP_NAME}}", FREE_ZIP).replace("{{SIZE}}", FREE_SIZE))
 write("download/gist/index.html", HEAD.format(description="Download Gist for Mac, free.", og_title="Download Gist")
+      + css + fill(page) + FOOTER)
+
+# ReelScroll is free too: its download page also goes through the trial counter, as "reelscroll".
+REEL_ZIP, REEL_SIZE = "ReelScroll-1.0.4.zip", "0.8 MB"
+page = ((src / "free-reelscroll.html").read_text().replace("{{APP}}", "ReelScroll").replace("{{ICON}}", "{{REELSCROLL}}")
+        .replace("{{TRIAL_URL}}", f"{TRIAL_COUNTER}reelscroll?f={REEL_ZIP}")
+        .replace("{{ZIP_NAME}}", REEL_ZIP).replace("{{SIZE}}", REEL_SIZE))
+write("download/reelscroll/index.html", HEAD.format(description="Download ReelScroll for Mac, free.", og_title="Download ReelScroll")
       + css + fill(page) + FOOTER)
 
 # Bundle download page: one payment, both installers.
