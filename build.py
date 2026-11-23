@@ -231,8 +231,8 @@ for rel, (name, description, og_title) in pages.items():
 # random and not linked from the site; the zips are assets of a public GitHub release.
 RELEASE = "https://github.com/Neto/spoon.com.br/releases/download/downloads-2026-11/"
 DOWNLOADS = {
-    "get/bcdr7W5qZ4ol/index.html": ("Spin", "{{SPIN}}", "Spin-1.9.6.zip", "2.6 MB"),
-    "get/XN5POMsYFafm/index.html": ("Grabb", "{{Grabb}}", "Grabb-1.10.1.zip", "82 MB"),
+    "get/bcdr7W5qZ4ol/index.html": ("Spin", "{{SPIN}}", "Spin-1.9.7.zip", "2.6 MB"),
+    "get/XN5POMsYFafm/index.html": ("Grabb", "{{Grabb}}", "Grabb-1.10.2.zip", "82 MB"),
 }
 download = (src / "download.html").read_text()
 for rel, (app, icon, zip_name, size) in DOWNLOADS.items():
