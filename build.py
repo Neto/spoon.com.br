@@ -180,7 +180,7 @@ PURCHASES = {
     "get/sw8jntSb82WU/index.html": ("Spin and Grabb", 8),
 }
 CONSENT = (src / "consent.html").read_text()
-# Prices in reais for Brazil and the phone version of the trial pages, added to every page.
+# The phone version of the trial pages, added to every page.
 SITE = (src / "site.html").read_text()
 
 
