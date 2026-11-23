@@ -12,7 +12,7 @@ import pathlib
 import re
 
 CONTACT = "support@spoon.com.br"  # support address shown on the site
-BUNDLE_URL = "https://buy.stripe.com/7sYeVc7086ya4fXeeD3AY02"  # Stripe Payment Link for Spin and Grabb together
+BUNDLE_URL = "https://buy.stripe.com/6oUaEW5W45u6bIp5I73AY03"  # Stripe Payment Link for Spin and Grabb together
 
 root = pathlib.Path(__file__).resolve().parent
 src = root / "src"
