@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build the site from src/.
 
-src/template.html  -> index.html          (sales page: Spin, Grabb, Gist and ReelScroll)
+src/template.html  -> index.html          (sales page: Spin, Grabb, Gist, ReelScroll and WhatsTime)
 src/company.html   -> company/index.html  (Spoon Software home)
 src/privacy.html   -> privacy/index.html  (Privacy Policy)
 
@@ -23,7 +23,7 @@ def data_uri(name):
 
 
 ICONS = {"{{SPIN}}": data_uri("spin.png"), "{{Grabb}}": data_uri("grabb.png"), "{{GIST}}": data_uri("gist.png"),
-         "{{REELSCROLL}}": data_uri("reelscroll.png")}
+         "{{REELSCROLL}}": data_uri("reelscroll.png"), "{{WHATSTIME}}": data_uri("whatstime.png")}
 
 
 def spoon_logo():
@@ -205,8 +205,9 @@ write("index.html", HEAD.format(
     description="Spin cleans up your Desktop in style. Grabb gets videos from anywhere. "
                 "Gist keeps only the article of a web page and shortens it, for free. "
                 "ReelScroll moves Instagram Reels on when a video ends, for free. "
+                "WhatsTime schedules WhatsApp messages, for free. "
                 "Small Mac apps for simple tasks.",
-    og_title="Spin, Grabb, Gist and ReelScroll") + fill(body) + "\n")
+    og_title="Spin, Grabb, Gist, ReelScroll and WhatsTime") + fill(body) + "\n")
 
 # Shared base: colour tokens, type, links, layout and hero, plus the footer rules.
 style = template[template.index("<style>") + len("<style>"):template.index("</style>")]
@@ -216,13 +217,13 @@ css = "<style>\n" + base + footer_css + PAGE_CSS + "</style>\n"
 
 pages = {
     "company/index.html": ("company.html",
-                           "Spoon Software makes small Mac apps for simple tasks: Spin, Grabb, Gist and ReelScroll.",
+                           "Spoon Software makes small Mac apps for simple tasks: Spin, Grabb, Gist, ReelScroll and WhatsTime.",
                            "Spoon Software"),
     "bundle/index.html": ("bundle.html",
                           "Spin and Grabb together for 8 dollars, once. Both Mac apps with lifetime upgrades.",
                           "Spin and Grabb Bundle"),
     "privacy/index.html": ("privacy.html",
-                           "How Spoon Software handles your data in Spin, Grabb, Gist, ReelScroll and on this website.",
+                           "How Spoon Software handles your data in Spin, Grabb, Gist, ReelScroll, WhatsTime and on this website.",
                            "Privacy Policy · Spoon Software"),
 }
 for rel, (name, description, og_title) in pages.items():
@@ -271,6 +272,14 @@ page = ((src / "free-reelscroll.html").read_text().replace("{{APP}}", "ReelScrol
         .replace("{{TRIAL_URL}}", f"{TRIAL_COUNTER}reelscroll?f={REEL_ZIP}")
         .replace("{{ZIP_NAME}}", REEL_ZIP).replace("{{SIZE}}", REEL_SIZE))
 write("download/reelscroll/index.html", HEAD.format(description="Download ReelScroll for Mac, free.", og_title="Download ReelScroll")
+      + css + fill(page) + FOOTER)
+
+# WhatsTime is free too: its download page also goes through the trial counter, as "whatstime".
+WT_ZIP, WT_SIZE = "WhatsTime-1.0.0.zip", "1.5 MB"
+page = ((src / "free-whatstime.html").read_text().replace("{{APP}}", "WhatsTime").replace("{{ICON}}", "{{WHATSTIME}}")
+        .replace("{{TRIAL_URL}}", f"{TRIAL_COUNTER}whatstime?f={WT_ZIP}")
+        .replace("{{ZIP_NAME}}", WT_ZIP).replace("{{SIZE}}", WT_SIZE))
+write("download/whatstime/index.html", HEAD.format(description="Download WhatsTime for Mac, free.", og_title="Download WhatsTime")
       + css + fill(page) + FOOTER)
 
 # Bundle download page: one payment, both installers.

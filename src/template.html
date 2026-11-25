@@ -1,21 +1,21 @@
 <meta charset="utf-8">
 <meta name="facebook-domain-verification" content="1gtfl1ik5s4ryik4ktzvzjawohm730">
-<title>Spin, Grabb, Gist and ReelScroll</title>
+<title>Spin, Grabb, Gist, ReelScroll and WhatsTime</title>
 <style>
 /* Layout: Apple-style Mac app store page. Glass nav, centered hero, one section per app (copy + looping demo player + buy box), FAQ, footer */
 :root{
   --bg:#f5f5f7; --tile:#ffffff; --ink:#1d1d1f; --ink-2:#6e6e73; --line:#d2d2d7;
   --link:#0066cc; --btn:#0071e3; --btn-ink:#ffffff;
-  --spin:#ff3d9a; --grabb:#5b3df5; --gist:#0a9a8a; --reel:#d9480f; --ok:#1f9d55; 
+  --spin:#ff3d9a; --grabb:#5b3df5; --gist:#0a9a8a; --reel:#d9480f; --wt:#1a9f53; --ok:#1f9d55; 
   --font:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
   --bg:#000000; --tile:#161617; --ink:#f5f5f7; --ink-2:#a1a1a6; --line:#424245;
-  --link:#2997ff; --spin:#ff5aac; --grabb:#8c78ff; --gist:#35d0bd; --reel:#ff8a4c; --ok:#30d158;  color-scheme:dark;
+  --link:#2997ff; --spin:#ff5aac; --grabb:#8c78ff; --gist:#35d0bd; --reel:#ff8a4c; --wt:#3ddc84; --ok:#30d158;  color-scheme:dark;
 }}
 :root[data-theme="dark"]{
   --bg:#000000; --tile:#161617; --ink:#f5f5f7; --ink-2:#a1a1a6; --line:#424245;
-  --link:#2997ff; --spin:#ff5aac; --grabb:#8c78ff; --gist:#35d0bd; --reel:#ff8a4c; --ok:#30d158;  color-scheme:dark;
+  --link:#2997ff; --spin:#ff5aac; --grabb:#8c78ff; --gist:#35d0bd; --reel:#ff8a4c; --wt:#3ddc84; --ok:#30d158;  color-scheme:dark;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -76,6 +76,7 @@ p{margin:0}
 #grabb .tagline{color:var(--grabb)}
 #gist .tagline{color:var(--gist)}
 #reelscroll .tagline{color:var(--reel)}
+#whatstime .tagline{color:var(--wt)}
 .app.solo .app-card{grid-template-columns:minmax(0,1fr)}
 .copy .what{color:var(--ink-2);max-width:46ch}
 .copy ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:15px}
@@ -189,15 +190,16 @@ footer nav a{color:var(--ink-2)}
     <div class="wrap">
       <p class="eyebrow">Apps for Mac</p>
       <h1>Small apps<br><span>for simple tasks.</span></h1>
-      <p class="lead">Little Mac apps that each do one job well. Pay <span>$5</span> once and every future update is yours. Gist and ReelScroll are free.</p>
+      <p class="lead">Little Mac apps that each do one job well. Pay <span>$5</span> once and every future update is yours. Gist, ReelScroll and WhatsTime are free.</p>
       <div class="hero-apps">
         <a href="#spin"><img src="{{SPIN}}" alt="" width="148" height="148">Spin<small>Clean up your Desktop in style.</small></a>
         <a href="#grabb"><img class="img-grabb" src="{{Grabb}}" alt="" width="148" height="148">Grabb<small>Get videos from anywhere.</small></a>
         <a href="#gist"><img src="{{GIST}}" alt="" width="148" height="148">Gist<small>Read the point, not the page.</small></a>
         <a href="#reelscroll"><img src="{{REELSCROLL}}" alt="" width="148" height="148">ReelScroll<small>Watch Reels hands free.</small></a>
+        <a href="#whatstime"><img src="{{WHATSTIME}}" alt="" width="148" height="148">WhatsTime<small>Schedule WhatsApp messages.</small></a>
       </div>
       <div class="promise">
-        <span><b>$5</b> per app, once</span><a class="deal" href="/bundle/"><b>$8</b> for Spin + Grabb</a><a class="deal" href="#gist">Gist is <b>free</b></a><a class="deal" href="#reelscroll">ReelScroll is <b>free</b></a><span>Lifetime upgrades</span><span>No in-app purchases</span><span>No subscriptions</span>
+        <span><b>$5</b> per app, once</span><a class="deal" href="/bundle/"><b>$8</b> for Spin + Grabb</a><a class="deal" href="#gist">Gist is <b>free</b></a><a class="deal" href="#reelscroll">ReelScroll is <b>free</b></a><a class="deal" href="#whatstime">WhatsTime is <b>free</b></a><span>Lifetime upgrades</span><span>No in-app purchases</span><span>No subscriptions</span>
       </div>
     </div>
   </section>
@@ -312,6 +314,31 @@ footer nav a{color:var(--ink-2)}
     </div>
   </section>
 
+  <section class="app solo" id="whatstime">
+    <div class="wrap">
+      <div class="app-card">
+        <div class="copy">
+          <img class="ico" src="{{WHATSTIME}}" alt="WhatsTime icon" width="84" height="84">
+          <h2>WhatsTime</h2>
+          <p class="tagline">Schedule WhatsApp messages.</p>
+          <p class="what">Write the message now and WhatsTime sends it later. Pick the contact, write the text, add photos, videos or files, and set the time. At that time WhatsTime opens the chat in WhatsApp on your Mac and sends it for you. In the last minute you see a countdown.</p>
+          <ul>
+            <li>Picks contacts from your Mac, or any number you type</li>
+            <li>Sends photos, videos and documents with the text as the caption</li>
+            <li>Keeps your Mac awake while messages wait</li>
+            <li>If a message cannot go out, it flashes in the list and you send it with one click</li>
+          </ul>
+          <div class="buy">
+            <div class="price">Free</div>
+            <a class="pill" href="/download/whatstime/">Download WhatsTime free</a>
+            <p class="req-inline"><b>macOS 14 or later</b> and WhatsApp for Mac. Apple silicon or Intel.</p>
+            <div class="terms"><span>Free</span><span>No account</span><span>Messages stay on your Mac</span><span>Not made by WhatsApp</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="bundle-band" id="bundle">
     <div class="wrap">
       <div class="band">
@@ -335,7 +362,11 @@ footer nav a{color:var(--ink-2)}
       </details>
       <details>
         <summary>Does it work on my Mac?</summary>
-        <p>All apps need a Mac with Apple silicon (M1 or later). Spin and Gist need macOS 26 or later. Grabb needs macOS 15 or later. Translation in Gist needs Apple Intelligence turned on in System Settings. ReelScroll needs macOS 13 or later and runs on Apple silicon and Intel Macs.</p>
+        <p>All apps need a Mac with Apple silicon (M1 or later). Spin and Gist need macOS 26 or later. Grabb needs macOS 15 or later. Translation in Gist needs Apple Intelligence turned on in System Settings. ReelScroll needs macOS 13 or later and runs on Apple silicon and Intel Macs. WhatsTime needs macOS 14 or later and WhatsApp for Mac, on Apple silicon or Intel.</p>
+      </details>
+      <details>
+        <summary>How does WhatsTime send when I am away?</summary>
+        <p>WhatsTime uses WhatsApp for Mac, the same way you do. At the send time it opens the chat, pastes your message and files, and presses Send. Your Mac must be on and WhatsApp must be logged in. The display can be off. If the Mac was locked or asleep, the message flashes in the list and goes out when you unlock, or with one click. WhatsTime is not made by WhatsApp or Meta, and automatic sending is your choice and your responsibility under WhatsApp's terms.</p>
       </details>
       <details>
         <summary>Is Gist really free?</summary>
@@ -351,7 +382,7 @@ footer nav a{color:var(--ink-2)}
 
 <footer>
   <div class="wrap">
-    <p><span>Prices in US dollars.</span> Gist and ReelScroll are free. Taxes may apply depending on where you live. Grabb uses yt-dlp, FFmpeg and Deno under their own licenses.</p>
+    <p><span>Prices in US dollars.</span> Gist, ReelScroll and WhatsTime are free. Taxes may apply depending on where you live. Grabb uses yt-dlp, FFmpeg and Deno under their own licenses.</p>
     {{FOOTER_ROW}}
   </div>
 </footer>
