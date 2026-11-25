@@ -26,7 +26,7 @@ ICONS = {"{{SPIN}}": data_uri("spin.png"), "{{Grabb}}": data_uri("grabb.png"), "
          "{{REELSCROLL}}": data_uri("reelscroll.png"), "{{WHATSTIME}}": data_uri("whatstime.png")}
 
 
-def spoon_logo():
+def spoon_logo(size_class=""):
     """Animated Spoon Software logo: the S from design/make_logo.py in neon layers.
 
     Same layers as the app icons: a wide blurred glow, a soft glow, the coloured line,
@@ -43,7 +43,7 @@ def spoon_logo():
         return f'style="-webkit-mask-image:{uri};mask-image:{uri}"'
 
     return (
-        '<div class="slogo" role="img" aria-label="Spoon Software logo">'
+        f'<div class="{("slogo " + size_class).strip()}" role="img" aria-label="Spoon Software logo">'
         f'<div class="g g1"><i {mask(12)}></i></div>'
         f'<div class="g g2"><i {mask(7)}></i></div>'
         f'<div class="g"><i {mask(5)}></i></div>'
@@ -53,6 +53,11 @@ def spoon_logo():
 
 
 ICONS["{{SLOGO}}"] = spoon_logo()
+
+# Header on every page: small logo on the left, LED ticker about the apps in the middle.
+HEADER = (src / "header.html").read_text().replace("{{SLOGO_SM}}", spoon_logo("sm"))
+# App tiles on the company page and the sales page. Hover shows more, a click goes to the app box.
+APP_TILES = (src / "app-tiles.html").read_text()
 
 HEAD = """<!doctype html>
 <html lang="en">
@@ -89,34 +94,6 @@ FOOTER = f"""<footer>
 
 # Styles for the company and privacy pages, on top of the shared base taken from the sales page.
 PAGE_CSS = """
-/* company page: animated logo, sizes scale from the 824 point squircle of the app icons */
-@property --a{syntax:"<angle>";inherits:true;initial-value:90deg}
-.slogo{--size:clamp(132px,20vw,196px);--s:calc(var(--size) / 824);position:relative;width:var(--size);height:var(--size);margin:0 auto 28px;
-  border-radius:calc(185 * var(--s));background:linear-gradient(#292929,#0d0d0d);
-  box-shadow:inset 0 0 0 calc(3 * var(--s)) rgba(255,255,255,.08),0 18px 28px rgba(0,0,0,.22);
-  animation:slogo-turn 6s linear infinite}
-@keyframes slogo-turn{to{--a:450deg}}
-.slogo .g{position:absolute;inset:0}
-.slogo .g1{filter:blur(calc(18 * var(--s)));opacity:.9}
-.slogo .g2{filter:blur(calc(4 * var(--s)))}
-.slogo i{position:absolute;inset:0;
-  background:conic-gradient(from var(--a),#ff2d55,#af52de,#007aff,#32ade6,#34c759,#ffcc00,#ff9500,#ff2d55);
-  -webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
-.slogo .core{position:absolute;inset:0;width:100%;height:100%;fill:none;stroke:rgba(255,255,255,.55);stroke-width:1.5;stroke-linejoin:round}
-@media (prefers-reduced-motion:reduce){.slogo{animation:none}}
-.apps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px}
-.app-tile{background:var(--tile);border-radius:28px;padding:40px 28px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;color:var(--ink)}
-.app-tile:hover{text-decoration:none}
-.app-tile img{width:112px;height:auto;margin-bottom:12px;filter:drop-shadow(0 14px 22px rgba(0,0,0,.2));transition:transform .35s cubic-bezier(.2,.8,.2,1)}
-.app-tile:hover img{transform:translateY(-5px) scale(1.03)}
-.app-tile .name{font-size:28px;font-weight:600;letter-spacing:-.03em}
-.app-tile .tag{color:var(--ink-2)}
-.app-tile .more{color:var(--link);margin-top:10px}
-.sec{font-size:clamp(28px,4vw,40px);margin:80px 0 24px}
-.values{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:20px}
-.values div{background:var(--tile);border-radius:24px;padding:28px}
-.values h3{font-size:21px;margin-bottom:8px}
-.values p{color:var(--ink-2)}
 .contact{padding-bottom:64px}
 .contact p{font-size:19px}
 
@@ -165,6 +142,7 @@ PAGE_CSS = """
 
 
 def fill(html):
+    html = html.replace("{{APP_TILES}}", APP_TILES).replace("{{HEADER}}", HEADER)
     for key, value in ICONS.items():
         html = html.replace(key, value)
     html = html.replace("{{BUNDLE_URL}}", BUNDLE_URL)
@@ -190,6 +168,9 @@ def write(rel, html):
     if rel in PURCHASES:
         name, value = PURCHASES[rel]
         purchase = '{content_name:"%s",value:%d,currency:"USD"}' % (name, value)
+    if 'class="site-head"' not in html:
+        assert "<main" in html, rel
+        html = html.replace("<main", HEADER + "<main", 1)
     html = html.rstrip() + "\n" + SITE + CONSENT.replace("{{PURCHASE}}", purchase)
     out = root / rel
     out.parent.mkdir(parents=True, exist_ok=True)
