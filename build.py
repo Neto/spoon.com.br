@@ -153,11 +153,19 @@ PAGE_CSS = """
 """
 
 
+# Free apps: the buttons on the sales page download the zip at once, through the trial counter.
+TRIAL_COUNTER = "https://spoon-license.spoonsoftware.workers.dev/trial/"
+FREE_ZIPS = {"gist": "Gist-1.0.0.zip", "reelscroll": "ReelScroll-1.0.4.zip", "whatstime": "WhatsTime-1.0.0.zip"}
+FREE_DL = {"{{%s_DL}}" % app.upper(): f"{TRIAL_COUNTER}{app}?f={zip_name}" for app, zip_name in FREE_ZIPS.items()}
+
+
 def fill(html):
     html = html.replace("{{APP_TILES}}", APP_TILES).replace("{{HEADER}}", HEADER)
     for key, value in ICONS.items():
         html = html.replace(key, value)
     html = html.replace("{{BUNDLE_URL}}", BUNDLE_URL)
+    for key, value in FREE_DL.items():
+        html = html.replace(key, value)
     html = html.replace("{{CONTACT}}", CONTACT).replace("{{FOOTER_ROW}}", FOOTER_ROW)
     leftover = re.findall(r"\{\{[A-Za-z_]+\}\}", html)
     assert not leftover, f"unreplaced placeholders: {leftover}"
@@ -242,7 +250,6 @@ for rel, (app, icon, zip_name, size) in DOWNLOADS.items():
 # Public trial download pages (linked from the site and from the license server).
 # The button goes through the license Worker, which counts trial downloads per app per day
 # (totals only) and sends the visitor on to the zip.
-TRIAL_COUNTER = "https://spoon-license.spoonsoftware.workers.dev/trial/"
 trial = (src / "trial.html").read_text()
 for app, icon in (("Spin", "{{SPIN}}"), ("Grabb", "{{Grabb}}")):
     zip_name, size = next((z, s) for a, _, z, s in DOWNLOADS.values() if a == app)
@@ -253,7 +260,7 @@ for app, icon in (("Spin", "{{SPIN}}"), ("Grabb", "{{Grabb}}")):
           + css + fill(page) + FOOTER)
 
 # Gist is free: its download page also goes through the trial counter, as "gist".
-FREE_ZIP, FREE_SIZE = "Gist-1.0.0.zip", "1.3 MB"
+FREE_ZIP, FREE_SIZE = FREE_ZIPS["gist"], "1.3 MB"
 page = ((src / "free.html").read_text().replace("{{APP}}", "Gist").replace("{{ICON}}", "{{GIST}}")
         .replace("{{TRIAL_URL}}", f"{TRIAL_COUNTER}gist?f={FREE_ZIP}")
         .replace("{{ZIP_NAME}}", FREE_ZIP).replace("{{SIZE}}", FREE_SIZE))
@@ -261,7 +268,7 @@ write("download/gist/index.html", HEAD.format(description="Download Gist for Mac
       + css + fill(page) + FOOTER)
 
 # ReelScroll is free too: its download page also goes through the trial counter, as "reelscroll".
-REEL_ZIP, REEL_SIZE = "ReelScroll-1.0.4.zip", "0.8 MB"
+REEL_ZIP, REEL_SIZE = FREE_ZIPS["reelscroll"], "0.8 MB"
 page = ((src / "free-reelscroll.html").read_text().replace("{{APP}}", "ReelScroll").replace("{{ICON}}", "{{REELSCROLL}}")
         .replace("{{TRIAL_URL}}", f"{TRIAL_COUNTER}reelscroll?f={REEL_ZIP}")
         .replace("{{ZIP_NAME}}", REEL_ZIP).replace("{{SIZE}}", REEL_SIZE))
@@ -269,7 +276,7 @@ write("download/reelscroll/index.html", HEAD.format(description="Download ReelSc
       + css + fill(page) + FOOTER)
 
 # WhatsTime is free too: its download page also goes through the trial counter, as "whatstime".
-WT_ZIP, WT_SIZE = "WhatsTime-1.0.0.zip", "1.5 MB"
+WT_ZIP, WT_SIZE = FREE_ZIPS["whatstime"], "1.5 MB"
 page = ((src / "free-whatstime.html").read_text().replace("{{APP}}", "WhatsTime").replace("{{ICON}}", "{{WHATSTIME}}")
         .replace("{{TRIAL_URL}}", f"{TRIAL_COUNTER}whatstime?f={WT_ZIP}")
         .replace("{{ZIP_NAME}}", WT_ZIP).replace("{{SIZE}}", WT_SIZE))
