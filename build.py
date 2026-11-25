@@ -138,12 +138,18 @@ PAGE_CSS = """
 .terms span::before{content:"\\2713\\00a0";color:var(--ok);font-weight:600}
 .req{font-size:13px;color:var(--ink-2)}
 .bundle-what{padding-bottom:64px}
-.bundle-videos{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:20px;margin-top:44px;text-align:center}
-.bundle-videos figure{margin:0;display:flex;flex-direction:column;gap:10px}
-.bundle-videos .demo{position:relative;aspect-ratio:5/4;border-radius:18px;overflow:hidden;background:#111;
-  box-shadow:0 30px 60px -28px rgba(0,0,0,.5),0 0 0 1px rgba(0,0,0,.08)}
-.bundle-videos video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.bundle-videos figcaption{font-size:17px;font-weight:600}
+.bundle-what .bundle-card{max-width:1000px}
+.duo{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(20px,4vw,40px)}
+.duo-app{display:flex;flex-direction:column;gap:14px;min-width:0}
+.duo-head{display:flex;align-items:center;gap:16px;color:var(--ink)}
+.duo-head:hover{text-decoration:none}
+.duo-head img{width:72px;height:auto;flex:none;filter:drop-shadow(0 10px 16px rgba(0,0,0,.18))}
+.duo-head b{display:block;font-size:28px;font-weight:600;letter-spacing:-.03em}
+.duo-head small{display:block;font-size:15px;color:var(--ink-2)}
+.duo-app .demo{position:relative;aspect-ratio:5/4;border-radius:18px;overflow:hidden;background:#111;
+  box-shadow:0 24px 48px -24px rgba(0,0,0,.5),0 0 0 1px rgba(0,0,0,.08)}
+.duo-app video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.duo-app p{color:var(--ink-2)}
 """
 
 
@@ -199,7 +205,8 @@ write("index.html", HEAD.format(
 # Shared base: colour tokens, type, links, layout and hero, plus the footer rules.
 style = template[template.index("<style>") + len("<style>"):template.index("</style>")]
 base = style[style.index(":root{"):style.index("/* app sections */")]
-footer_css = style[style.index("footer{"):style.index("@media (prefers-reduced-motion")]
+footer_start = style.index("footer{")
+footer_css = style[footer_start:style.index("@media (prefers-reduced-motion", footer_start)]
 css = "<style>\n" + base + footer_css + PAGE_CSS + "</style>\n"
 
 pages = {
