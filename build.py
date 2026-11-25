@@ -54,7 +54,7 @@ def spoon_logo(size_class=""):
 
 ICONS["{{SLOGO}}"] = spoon_logo()
 
-# Header on every page: small logo on the left, LED ticker about the apps in the middle.
+# Header on every page: small Spoon Software logo on the left.
 HEADER = (src / "header.html").read_text().replace("{{SLOGO_SM}}", spoon_logo("sm"))
 # App tiles on the company page and the sales page. Hover shows more, a click goes to the app box.
 APP_TILES = (src / "app-tiles.html").read_text()
@@ -138,6 +138,12 @@ PAGE_CSS = """
 .terms span::before{content:"\\2713\\00a0";color:var(--ok);font-weight:600}
 .req{font-size:13px;color:var(--ink-2)}
 .bundle-what{padding-bottom:64px}
+.bundle-videos{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:20px;margin-top:44px;text-align:center}
+.bundle-videos figure{margin:0;display:flex;flex-direction:column;gap:10px}
+.bundle-videos .demo{position:relative;aspect-ratio:5/4;border-radius:18px;overflow:hidden;background:#111;
+  box-shadow:0 30px 60px -28px rgba(0,0,0,.5),0 0 0 1px rgba(0,0,0,.08)}
+.bundle-videos video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.bundle-videos figcaption{font-size:17px;font-weight:600}
 """
 
 
