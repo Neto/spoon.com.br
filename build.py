@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build the site from src/.
 
-src/template.html  -> index.html          (sales page: Spin, Grabb, Gist, ReelScroll and WhatsTime)
+src/template.html  -> index.html          (sales page: Spin, Grabb, Gist, ReelScroll, WhatsTime and Cena)
 src/company.html   -> company/index.html  (Spoon Software home)
 src/privacy.html   -> privacy/index.html  (Privacy Policy)
 
@@ -23,7 +23,8 @@ def data_uri(name):
 
 
 ICONS = {"{{SPIN}}": data_uri("spin.png"), "{{Grabb}}": data_uri("grabb.png"), "{{GIST}}": data_uri("gist.png"),
-         "{{REELSCROLL}}": data_uri("reelscroll.png"), "{{WHATSTIME}}": data_uri("whatstime.png")}
+         "{{REELSCROLL}}": data_uri("reelscroll.png"), "{{WHATSTIME}}": data_uri("whatstime.png"),
+         "{{CENA}}": data_uri("cena.png")}
 
 
 def spoon_logo(size_class=""):
@@ -155,7 +156,7 @@ PAGE_CSS = """
 
 # Free apps: the buttons on the sales page download the zip at once, through the trial counter.
 TRIAL_COUNTER = "https://spoon-license.spoonsoftware.workers.dev/trial/"
-FREE_ZIPS = {"gist": "Gist-1.0.0.zip", "reelscroll": "ReelScroll-1.0.4.zip", "whatstime": "WhatsTime-1.0.0.zip"}
+FREE_ZIPS = {"gist": "Gist-1.0.0.zip", "reelscroll": "ReelScroll-1.0.4.zip", "whatstime": "WhatsTime-1.0.0.zip", "cena": "Cena-1.0.0.zip"}
 FREE_DL = {"{{%s_DL}}" % app.upper(): f"{TRIAL_COUNTER}{app}?f={zip_name}" for app, zip_name in FREE_ZIPS.items()}
 
 
@@ -207,8 +208,9 @@ write("index.html", HEAD.format(
                 "Gist keeps only the article of a web page and shortens it, for free. "
                 "ReelScroll moves Instagram Reels on when a video ends, for free. "
                 "WhatsTime schedules WhatsApp messages, for free. "
+                "Cena saves your open apps and windows as scenes, for free. "
                 "Small Mac apps for simple tasks.",
-    og_title="Spin, Grabb, Gist, ReelScroll and WhatsTime") + fill(body) + "\n")
+    og_title="Spin, Grabb, Gist, ReelScroll, WhatsTime and Cena") + fill(body) + "\n")
 
 # Shared base: colour tokens, type, links, layout and hero, plus the footer rules.
 style = template[template.index("<style>") + len("<style>"):template.index("</style>")]
@@ -219,13 +221,13 @@ css = "<style>\n" + base + footer_css + PAGE_CSS + "</style>\n"
 
 pages = {
     "company/index.html": ("company.html",
-                           "Spoon Software makes small Mac apps for simple tasks: Spin, Grabb, Gist, ReelScroll and WhatsTime.",
+                           "Spoon Software makes small Mac apps for simple tasks: Spin, Grabb, Gist, ReelScroll, WhatsTime and Cena.",
                            "Spoon Software"),
     "bundle/index.html": ("bundle.html",
                           "Spin and Grabb together for 8 dollars, once. Both Mac apps with lifetime upgrades.",
                           "Spin and Grabb Bundle"),
     "privacy/index.html": ("privacy.html",
-                           "How Spoon Software handles your data in Spin, Grabb, Gist, ReelScroll, WhatsTime and on this website.",
+                           "How Spoon Software handles your data in Spin, Grabb, Gist, ReelScroll, WhatsTime, Cena and on this website.",
                            "Privacy Policy · Spoon Software"),
 }
 for rel, (name, description, og_title) in pages.items():
@@ -281,6 +283,14 @@ page = ((src / "free-whatstime.html").read_text().replace("{{APP}}", "WhatsTime"
         .replace("{{TRIAL_URL}}", f"{TRIAL_COUNTER}whatstime?f={WT_ZIP}")
         .replace("{{ZIP_NAME}}", WT_ZIP).replace("{{SIZE}}", WT_SIZE))
 write("download/whatstime/index.html", HEAD.format(description="Download WhatsTime for Mac, free.", og_title="Download WhatsTime")
+      + css + fill(page) + FOOTER)
+
+# Cena is free too: its download page also goes through the trial counter, as "cena".
+CENA_ZIP, CENA_SIZE = FREE_ZIPS["cena"], "1.0 MB"
+page = ((src / "free-cena.html").read_text().replace("{{APP}}", "Cena").replace("{{ICON}}", "{{CENA}}")
+        .replace("{{TRIAL_URL}}", f"{TRIAL_COUNTER}cena?f={CENA_ZIP}")
+        .replace("{{ZIP_NAME}}", CENA_ZIP).replace("{{SIZE}}", CENA_SIZE))
+write("download/cena/index.html", HEAD.format(description="Download Cena for Mac, free.", og_title="Download Cena")
       + css + fill(page) + FOOTER)
 
 # Bundle download page: one payment, both installers.

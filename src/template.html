@@ -1,21 +1,21 @@
 <meta charset="utf-8">
 <meta name="facebook-domain-verification" content="1gtfl1ik5s4ryik4ktzvzjawohm730">
-<title>Spin, Grabb, Gist, ReelScroll and WhatsTime</title>
+<title>Spin, Grabb, Gist, ReelScroll, WhatsTime and Cena</title>
 <style>
 /* Layout: Apple-style Mac app store page. Glass nav, centered hero, one section per app (copy + looping demo player + buy box), FAQ, footer */
 :root{
   --bg:#f5f5f7; --tile:#ffffff; --ink:#1d1d1f; --ink-2:#6e6e73; --line:#d2d2d7;
   --link:#0066cc; --btn:#0071e3; --btn-ink:#ffffff;
-  --spin:#ff3d9a; --grabb:#5b3df5; --gist:#0a9a8a; --reel:#d9480f; --wt:#1a9f53; --ok:#1f9d55; 
+  --spin:#ff3d9a; --grabb:#5b3df5; --gist:#0a9a8a; --reel:#d9480f; --wt:#1a9f53; --cena:#c8102e; --ok:#1f9d55; 
   --font:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
   --bg:#000000; --tile:#161617; --ink:#f5f5f7; --ink-2:#a1a1a6; --line:#424245;
-  --link:#2997ff; --spin:#ff5aac; --grabb:#8c78ff; --gist:#35d0bd; --reel:#ff8a4c; --wt:#3ddc84; --ok:#30d158;  color-scheme:dark;
+  --link:#2997ff; --spin:#ff5aac; --grabb:#8c78ff; --gist:#35d0bd; --reel:#ff8a4c; --wt:#3ddc84; --cena:#ff5c6c; --ok:#30d158;  color-scheme:dark;
 }}
 :root[data-theme="dark"]{
   --bg:#000000; --tile:#161617; --ink:#f5f5f7; --ink-2:#a1a1a6; --line:#424245;
-  --link:#2997ff; --spin:#ff5aac; --grabb:#8c78ff; --gist:#35d0bd; --reel:#ff8a4c; --wt:#3ddc84; --ok:#30d158;  color-scheme:dark;
+  --link:#2997ff; --spin:#ff5aac; --grabb:#8c78ff; --gist:#35d0bd; --reel:#ff8a4c; --wt:#3ddc84; --cena:#ff5c6c; --ok:#30d158;  color-scheme:dark;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -80,7 +80,10 @@ section[id],main[id]{scroll-margin-top:72px}
 @media (prefers-reduced-motion:reduce){.slogo{animation:none}}
 
 /* app tiles: hover or focus raises a curtain with more about the app; a click goes to its box */
-.apps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:16px;margin-top:48px;text-align:center}
+.apps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:48px;text-align:center}
+/* six apps: full rows only, 6 across, 3 across, or 2 across on a phone */
+@media (min-width:560px){.apps{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (min-width:1024px){.apps{grid-template-columns:repeat(6,minmax(0,1fr))}}
 .app-tile{position:relative;overflow:hidden;background:var(--tile);border-radius:26px;padding:34px 18px 30px;min-height:268px;
   display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
 .app-tile:hover,.app-tile:focus-visible{text-decoration:none}
@@ -101,6 +104,7 @@ section[id],main[id]{scroll-margin-top:72px}
 .apps .app-tile:nth-child(3){animation-delay:-2.8s}
 .apps .app-tile:nth-child(4){animation-delay:-4.2s}
 .apps .app-tile:nth-child(5){animation-delay:-5.6s}
+.apps .app-tile:nth-child(6){animation-delay:-0.7s}
 @keyframes tile-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 .apps + .promise{margin-top:36px}
 @media (prefers-reduced-motion:reduce){.app-tile .curtain{transition:none}.apps .app-tile{animation:none}}
@@ -126,6 +130,7 @@ section[id],main[id]{scroll-margin-top:72px}
 #gist .tagline{color:var(--gist)}
 #reelscroll .tagline{color:var(--reel)}
 #whatstime .tagline{color:var(--wt)}
+#cena .tagline{color:var(--cena)}
 .copy .what{color:var(--ink-2)}
 .copy ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:15px}
 .copy li{display:grid;grid-template-columns:18px 1fr;gap:10px}
@@ -426,6 +431,39 @@ footer nav a{color:var(--ink-2)}
     </div>
   </section>
 
+  <section class="app solo" id="cena">
+    <div class="wrap">
+      <div class="app-card">
+        <div class="app-head">
+          <img class="ico" src="{{CENA}}" alt="Cena icon" width="84" height="84">
+          <div><h2>Cena</h2>
+          <p class="tagline">Set the stage for your work.</p></div>
+        </div>
+        <div class="copy">
+          <p class="what">Cena saves a scene: the apps you have open and where their windows are. Load the scene later and Cena quits the apps you do not need, opens the missing ones and puts every window back in place. Keep one scene for work, one for editing and one for a heavy game or a flight simulator.</p>
+          <ul>
+            <li>Shows what a scene opens and quits before you load it</li>
+            <li>Shows how much memory each app uses and how much a load frees</li>
+            <li>Mark an app to close: it quits only when you load a scene, never by force</li>
+            <li>A small ePaper style panel shows the CPU and memory in use now</li>
+          </ul>
+        </div>
+        <div class="buy">
+          <div class="buy-actions">
+            <div class="price">Free</div>
+            <a class="pill" href="{{CENA_DL}}" data-trial="Cena" data-mac-only>Download Cena free</a>
+            <a class="pill" href="/download/cena/" data-phone-only hidden>Get Cena on your Mac</a>
+            <a class="pill ghost" href="/download/cena/" data-mac-only>Instructions</a>
+          </div>
+          <div class="buy-meta">
+            <p class="req-inline"><b>macOS 26 or later.</b> Apple silicon.</p>
+            <div class="terms"><span>Free</span><span>No account</span><span>Scenes stay on your Mac</span><span>Never force quits</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="bundle-band" id="bundle">
     <div class="wrap">
       <div class="band">
@@ -455,11 +493,16 @@ footer nav a{color:var(--ink-2)}
           <li><b>Gist:</b> macOS 26 or later, on a Mac with Apple silicon. Translation needs Apple Intelligence turned on in System Settings.</li>
           <li><b>ReelScroll:</b> macOS 13 or later, on Apple silicon or Intel.</li>
           <li><b>WhatsTime:</b> macOS 14 or later and WhatsApp for Mac, on Apple silicon or Intel.</li>
+          <li><b>Cena:</b> macOS 26 or later, on a Mac with Apple silicon.</li>
         </ul>
       </details>
       <details>
         <summary>How does WhatsTime send when I am away?</summary>
         <p>WhatsTime uses WhatsApp for Mac, the same way you do. At the send time it opens the chat, pastes your message and files, and presses Send. Your Mac must be on and WhatsApp must be logged in. The display can be off. If the Mac was locked or asleep, the message flashes in the list and goes out when you unlock, or with one click. WhatsTime is not made by WhatsApp or Meta, and automatic sending is your choice and your responsibility under WhatsApp's terms.</p>
+      </details>
+      <details>
+        <summary>Why does Cena ask to control my Mac?</summary>
+        <p>Cena moves and resizes the windows of other apps. macOS allows that only after you turn Cena on in System Settings &gt; Privacy &amp; Security. Without it, Cena still opens and quits apps, but it cannot put the windows back in place. Cena never force quits an app: an app with unsaved work asks you first.</p>
       </details>
       <details>
         <summary>Is Gist really free?</summary>
@@ -475,7 +518,7 @@ footer nav a{color:var(--ink-2)}
 
 <footer>
   <div class="wrap">
-    <p><span>Prices in US dollars.</span> Gist, ReelScroll and WhatsTime are free. Taxes may apply depending on where you live. Grabb uses yt-dlp, FFmpeg and Deno under their own licenses.</p>
+    <p><span>Prices in US dollars.</span> Gist, ReelScroll, WhatsTime and Cena are free. Taxes may apply depending on where you live. Grabb uses yt-dlp, FFmpeg and Deno under their own licenses.</p>
     {{FOOTER_ROW}}
   </div>
 </footer>
