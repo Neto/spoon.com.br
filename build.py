@@ -156,7 +156,7 @@ PAGE_CSS = """
 
 # Free apps: the buttons on the sales page download the zip at once, through the trial counter.
 TRIAL_COUNTER = "https://spoon-license.spoonsoftware.workers.dev/trial/"
-FREE_ZIPS = {"gist": "Gist-1.0.0.zip", "reelscroll": "ReelScroll-1.0.4.zip", "whatstime": "WhatsTime-1.0.0.zip", "cena": "Cena-1.0.0.zip"}
+FREE_ZIPS = {"gist": "Gist-1.0.0.zip", "reelscroll": "ReelScroll-1.0.4.zip", "whatstime": "WhatsTime-1.0.0.zip", "cena": "Cena-1.0.1.zip"}
 FREE_DL = {"{{%s_DL}}" % app.upper(): f"{TRIAL_COUNTER}{app}?f={zip_name}" for app, zip_name in FREE_ZIPS.items()}
 
 
